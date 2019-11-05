@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    var count = 0;
+    var pics = ["<img src='horse.jpg'>",
+                "<img src='elephant.jpg'>",
+                "<img src='man.jpg'>"];
+    var corAns = [400, 3000, 10000];
+    var useAns = [];
+    var currentPic = 0;
+    function init() {
+      var first
+      if (currentPic >= 3) {
+        document.getElementById('output').innerHTML = compareArrays(corAns,useAns);
+      } else {
+        document.getElementById('output').innerHTML = pics[currentPic];
+      }
+    }
+      function compareArrays(x,y) {
+        var numCorrect = 0;
+        for (var i = 0; i < x.length; i++) {
+          if (x[i] == y[i]) {
+            numCorrect++;
+          }
+        }
+        if (numCorrect == 0) {
+          return "<p id='result'>You Suck</p>";
+        } else if (numCorrect == 1) {
+          return "<p id='result'>You got 1 question correct!</p>"
+        } else {
+          return "<p id='result'>You got " + numCorrect + " questions correct!</p>"
+        }
+      }
+      function makeGuess() {
+        useAns[currentPic] = parseInt(document.getElementById("input").value);
+        currentPic++;
+        init();
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <center><p id="title">Guess the Wieght!</p></center>
+    <span id="output"></span>
+    <br>
+    <input id="input" type="text" value="Enter Guess Here">
+    <input type="button" value="Make Guess" onclick="makeGuess()">
+    <br>
+  </body>
+</html>
